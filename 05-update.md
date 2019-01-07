@@ -125,4 +125,75 @@ And replace it with this:
 ></app-add-show>
 ```
 
-All we're doing is adding the inputs to the
+All we're doing is adding the inputs to the component call, now we need to actually get those variables from our `app.component.ts` file.
+
+First, we'l declare the properties right before our constructor:
+
+```js
+public tvShowList: Observable<TVShow[]>;
+public showForm = false;
+public oldShowName = '';
+public oldShowDescription = '';
+public showIdToUpdate: string;
+```
+
+Next we'l create a function that takes the TV Show as a parameter and returns the information to update to us, we'll call it `activateEditShow()`:
+
+```js
+activateEditShow(tvShow: TVShow): void {
+  this.showForm = true;
+  this.showIdToUpdate = tvShow.showId;
+  this.oldShowName = tvShow.showName;
+  this.oldShowDescription = tvShow.showDescription;
+}
+```
+
+The funcions is setting `showForm` to `true`to display the form, and then setting all the information we need to perform the update.
+
+Now we need to figure out where do we call this function from, it has to be from a place where we have access to the current TV Show object.
+
+The only place it makes sense to do this is inside `CardComponent`, since it's where we have access to the TV show, we'll pass it through the **Edit** function.
+
+Open `card.component.html` and find the action buttons, they look like this:
+
+```html
+<div class="show-actions">
+  <button (click)="deleteShow()" class="button delete">Delete Show</button>
+  <button (click)="editShow()" class="button edit">Edit Show</button>
+</div>
+```
+
+We're going to use the `editShow()` function to send the `TVShow`object to the main component, for that we first need to send the proper parameters to the funcion:
+
+```html
+<div class="show-actions">
+  <button (click)="deleteShow(showId, showName)" class="button delete">
+    Delete Show
+  </button>
+  <button (click)="editShow(showId, showName, showDescription)" class="button edit">
+    Edit Show
+  </button>
+</div>
+```
+
+We're sending the `showId` and `showName` to the `deleteShow()` function, and we're also adding the `showDescription` to the `editShow()` function.
+
+Now let's move to `card.component.ts` and add a new property, it's going to be an `@Output()` called `showIdChanged`:
+
+```js
+@Input() showName: string;
+@Input() showDescription: string;
+@Input() showId: string;
+@Output() showIdChanged: EventEmitter<TVShow> =   new EventEmitter();
+```
+
+After we create the property we're going to create the `editShow()` function, it needs to emit the show's information to the parent component:
+
+```js
+editShow(showId: string, showName: string, showDescription: string): void {
+  const newShowInfo: TVShow = { showId, showName, showDescription }
+  this.showIdChanged.emit(newShowInfo);
+}
+```
+
+And that's it, when you click on the **Edit Show** button from any of the cards you should see the form display already pre-filled with the show's information.
