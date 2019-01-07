@@ -1,10 +1,10 @@
 # Reading objects from our database
 
-In the previous lesson we learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
+In the previous lesson, we learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
 
 This time we're going to do things a little different, instead of starting with the logic, we're going to start with the view, even if we need to hardcode the data, and then replace it with dynamic data.
 
-We'll work like this because we want you to have feedback from the begining, and be able to see what you're building.
+We'll work like this because we want you to have feedback from the beginning, and be able to see what you're building.
 
 The idea is to show a list of cards, and inside each card have the show's information, by the end of the lesson you should have something like this:
 
@@ -18,7 +18,7 @@ Let's start with creating a component for our cards, open the **Angular Generato
 
 Now go into the `app.component.html` file and add this to the end:
 
-```markup
+```html
 <app-card></app-card>
 ```
 
@@ -26,13 +26,13 @@ We're adding our card component to the app component, this will render the card 
 
 Now let's move to the `card.component.html`, the idea is to have a card that displays the show's information and two buttons, a button to delete the show from our database and a button to edit the show's information:
 
-```markup
+```html
 <div class="card">
   <div class="show-info">
     <h2 class="title">The Mentalist</h2>
     <p class="description">
       I gave an honest chance to this show, but for the life of me I don't like it, like,
-      there are tons of 'insert other profession here' turned detective that it's just
+      there are tons of 'insert another profession here' turned detective that it's just
       boring.
     </p>
   </div>
@@ -104,7 +104,7 @@ import { FirebaseService } from '../firebase.service';
 import { TVShow } from '../show-interface';
 ```
 
-By now you should recognize all of those imports, since we used them in the previous component, but if you have any questions about them remember that we're all here for you and you can asks us as many questions as you want :-)
+By now you should recognize all of those imports since we used them in the previous component, but if you have any questions about them remember that we're all here for you and you can ask us as many questions as you want :-)
 
 Now, right before the constructor we'll add the component's inputs:
 
@@ -156,17 +156,17 @@ This function is taking the `tvShowCollection` Collection and attaching the meth
 
 If you move back to `app.component.ts` you'll notice that the error is gone.
 
-Our next move is to replace the hardcoded that with the data our database is returning, for that we have to edit 2 files, the `app.component.html` file and the `card.component.html` file.
+Our next move is to replace the hardcoded that with the data our database is returning, for that we have to edit 2 files, the `app.component.html` file, and the `card.component.html` file.
 
 Let's start with the `app.component.html` file, find the card initialization that looks like this:
 
-```markup
+```html
 <app-card></app-card>
 ```
 
 And replace it with this:
 
-```markup
+```html
 <app-card
   *ngFor="let item of tvShowList | async"
   [showName]="item.showName"
@@ -183,7 +183,7 @@ Here's what's going on:
 
 And lastly we need to go into the `card.component.html` file and make it look like this:
 
-```markup
+```html
 <div class="card">
   <div class="show-info">
     <h2 class="title">{{ showName }}</h2>

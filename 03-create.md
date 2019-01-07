@@ -1,6 +1,6 @@
 # Adding objects to our database
 
-In the previous lesson we connected our app to Firebase. Now it's time to start writing content into the database, for that we need a couple of things:
+In the previous lesson, we connected our app to Firebase. Now it's time to start writing content into the database, for that we need a couple of things:
 
 - A form that lets us write the content.
 - A function that takes that content and sends it to Firestore.
@@ -30,19 +30,19 @@ While we're generating the files, open the **Angular Generator** again (right-cl
 
 It's a service where we'll store all the interactions with the database, we'll cover more about it when we start using it.
 
-We'll start setting up the component's logic, that way when it's time to implement wiew or styles it will just work ™
+We'll start setting up the component's logic, that way when it's time to implement view or styles it will just work ™
 
 So, go into `add-show.component.ts` and the first thing we'll do is to add all the imports we need at the top of the file:
 
-```javascript
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+```js
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FirebaseService } from '../firebase.service';
 ```
 
 We're importing:
 
-- `{ Component, OnInit, Output, EventEmitter }` to handle Angular component interactions, we'll go into more details later but the `add-show` component needs to have a way to talk with the app component.
+- `{ Component, OnInit, Input, Output, EventEmitter }` to handle Angular component interactions, we'll go into more details later but the `add-show` component needs to have a way to talk with the app component.
 - `{ FormGroup, Validators, FormBuilder }` are for working with Reactive forms in Angular.
 - `{ FirebaseService }`is the Firebase service we just created, it's for handling the interactions with the database.
 
@@ -50,7 +50,7 @@ Before the app starts throwing errors, we need to add a module to the `app.modul
 
 It should look like this:
 
-```javascript
+```js
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -85,7 +85,7 @@ export class AppModule {}
 
 Alright, now that everything is imported we'll start by adding the Class variables we need for this component, right before our `constructor()` we'll add the variable that will hold our form.
 
-```javascript
+```js
 public newShowForm: FormGroup;
 ```
 
@@ -93,19 +93,19 @@ It's a public variable that we can bind to the HTML file, and it's of type `Form
 
 Now, right below that one we need to add our Output:
 
-```javascript
+```js
 @Output() showCreationForm: EventEmitter<boolean> =   new EventEmitter();
 ```
 
 The `@Output()` decorator lets the component know we'll be broadcasting the value of the `showCreationForm` variable to our parent component.
 
-The `showCreationForm` variable is a boolean that will trigger when the form is submited (_more on that later_), and we're adding it so we can close the form once someone clicks on the submit button.
+The `showCreationForm` variable is a boolean that will trigger when the form is submitted (_more on that later_), and we're adding it so we can close the form once someone clicks on the submit button.
 
 And the `EventEmitter` will be in charge of broadcasting (_or emiting_) the value of `showCreationForm` to the parent component.
 
 Now we need to inject a couple of things to the class constructor:
 
-```javascript
+```js
 constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService) {
   this.newShowForm = this.formBuilder.group({
     showName: ['', Validators.required],
@@ -123,7 +123,7 @@ Here's what we're doing:
 
 After setting up everything we need to create a function that will take the form values and send it to the Firebase service to be stored in the database, go ahead and add it after the `ngOnInit()` function:
 
-```javascript
+```js
 addShow(filledShowForm: FormGroup): void {
   const showName: string = filledShowForm.value.showName;
   const showDescription: string = filledShowForm.value.showDescription;
@@ -150,7 +150,7 @@ That's because we're calling the `.createShow()` function from the Firebase serv
 
 Open the `firebase.service.ts` file, we'll start by importing what we need at the top of the file:
 
-```javascript
+```js
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -162,13 +162,13 @@ import {
 
 We're importing `Observable`, `AngularFirestoreCollection`, and `AngularFirestoreDocument` for type-setting only.
 
-> NOTE: We use TypeScript and it's aways a good idea to set the type of the variable, propery, function return, etc. This way we get better autocompletion from the editor, and make fewer syntax mistakes.
+> NOTE: We use TypeScript and it's always a good idea to set the type of the variable, property, function return, etc. This way we get better autocompletion from the editor and make fewer syntax mistakes.
 
 And we're importing `AngularFirestore` to call our Firestore database.
 
-The next thing we'l add is a variable to hold our TV Show Collection, we'll create it right before the constructor and then use the constructor to initialize it:
+The next thing we'll add is a variable to hold our TV Show Collection, we'll create it right before the constructor and then use the constructor to initialize it:
 
-```javascript
+```js
 tvShowCollection: AngularFirestoreCollection<any>;
 
 constructor(private db: AngularFirestore) {
@@ -186,7 +186,7 @@ So in the above code snippet, `tvShowCollection` is a list that will hold all th
 
 And second, it really bugs me to use `<any>` when working with TypeScript, using `any` makes us waste all the TypeScript powers and we should correct that.
 
-We're using `any` but we know the type of the collection, it's TV Show, because that collection will have a list of TV Shows, knowing that, we can create a TVShow interface with the properties.
+We're using `any` but we know the type of the collection, it's TV Show because that collection will have a list of TV Shows, knowing that, we can create a TVShow interface with the properties.
 
 ## Creating an Interface
 
@@ -194,7 +194,7 @@ Go ahead and open the **Angular Generator** again (_right-click the app/ folder_
 
 It will create the file `show-interface.ts`, open it and make it look like this:
 
-```javascript
+```js
 export interface TVShow {
   showId: string;
   showName: string;
@@ -206,7 +206,7 @@ We're telling our app that the interface `TVShow` has 3 properties, `showId`, `s
 
 Now we can go back to our `firebase.service.ts` and change that code snippet to look like this:
 
-```javascript
+```js
 tvShowCollection: AngularFirestoreCollection<TVShow>;
 
 constructor(private db: AngularFirestore) {
@@ -214,15 +214,15 @@ constructor(private db: AngularFirestore) {
 }
 ```
 
-It will tell you that it doesn't know what `TVShow` is, so we need to add it to the page imports at the begining of the file:
+It will tell you that it doesn't know what `TVShow` is, so we need to add it to the page imports at the beginning of the file:
 
-```javascript
+```js
 import { TVShow } from './show-interface';
 ```
 
 Now that we have that taken care of, it's time to add our `createShow()` function to the service, go ahead and add it after the constructor:
 
-```javascript
+```js
 public createShow(showName: string, showDescription: string): Promise<void> {
   const showId: string = this.db.createId();
   return this.tvShowCollection
@@ -238,18 +238,18 @@ Here's what's going on:
   - They're both type string.
 - It returns a promise of type void (_This is an empty promise just to let us know it worked_).
 - We're asking Firestore to create an ID for us.
-- Then we're navigating to the document with that ID (_It doesn't exists, but no worries, the function creates it_).
+- Then we're navigating to the document with that ID (_It doesn't exist, but no worries, the function creates it_).
 - We're adding the value of the properties to the new TV Show document.
 
 Now that we've created all of the component's logic, let's start creating the view, move into the `add-show.component.html` file and add a form:
 
-```markup
+```html
 <form [formGroup]="newShowForm"></form>
 ```
 
 We're binding our form to the `newShowForm` we created in the TypeScript file, now let's start with the inputs, we need to add an input to hold the forms name:
 
-```markup
+```html
 <form [formGroup]="newShowForm">
   <label class="formItem">
     <span class="form-label">Show Name:</span>
@@ -262,7 +262,7 @@ It's a regular input type text and we're binding it to the `showName` property o
 
 Next, we need to add a description field:
 
-```markup
+```html
 <form [formGroup]="newShowForm">
   <label class="formItem">
     <span class="form-label">Show Name:</span>
@@ -276,9 +276,9 @@ Next, we need to add a description field:
 </form>
 ```
 
-It's the same as above, we're just changing the input for a `textarea` to hold more information, and lastly we need to add a button to submit the form:
+It's the same as above, we're just changing the input for a `textarea` to hold more information, and lastly, we need to add a button to submit the form:
 
-```markup
+```html
 <form [formGroup]="newShowForm">
   <label class="formItem">
     <span class="form-label">Show Name:</span>
@@ -357,15 +357,15 @@ button {
 }
 ```
 
-We won't go into details about the styles, but they are mainly giving some margins, paddings and colors to make sure everything looks nice.
+We won't go into details about the styles, but they are mainly giving some margins, paddings, and colors to make sure everything looks nice.
 
 ## Let's test it
 
-By now you've written a good amount of code but haven't seen the results of it yet, this can be a little frustraiting so let's take a moment to display our form and create new shows.
+By now you've written a good amount of code but haven't seen the results of it yet, this can be a little frustrating so let's take a moment to display our form and create new shows.
 
 Let's start by opening the `app.component.html` file and pasting in the following code:
 
-```markup
+```html
 <h1 class="page-title">My TV Show Database</h1>
 
 <p>
@@ -414,7 +414,7 @@ Like before, we're just giving some love to our app, making it look nicer.
 
 And lastly, let's open the `app.component.ts` file and make it look like this:
 
-```javascript
+```js
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FirebaseService } from './firebase.service';
@@ -441,7 +441,7 @@ export class AppComponent {
 
 Here's what's going on:
 
-- We're adding the `showForm` property and setting it to `false`, that way the form won't be visible on page load.
+- We're adding the `showForm` property and set it to `false`, that way the form won't be visible on page load.
 - We're adding the `showCreateForm()` function that sets the value of `showForm` to the opposite of what it currently is (_this will either show or hide the form_).
 - We're adding the `hideForm()` function, this will make the value of `showForm` equal to `false` and hide our form.
 
@@ -451,4 +451,4 @@ Right now you should have something like this on your app:
 
 And when you click the button it either shows or hides the form depending on its current state.
 
-When you're ready let's move to the next step, where we'll be adding the **R** part of CRUD, we'll learn how to read data from Firestore and display it inside our app.
+When you're ready, let's move to the next step, where we'll be adding the **R** part of CRUD, we'll learn how to read data from Firestore and display it inside our app.
