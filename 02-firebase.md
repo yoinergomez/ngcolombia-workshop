@@ -12,7 +12,7 @@ You can learn more about Firebase at [https://firebase.google.com/](https://fire
 
 Since we want to focus on building the actual app on this workshop we have already created a Firebase app for you to connect to, and we'll share the credentials with you later on this step.
 
-This we'll help you save some time that can be used to finish the app :)
+This we'll help you save some time that can be used to finish the app :\)
 
 ## Installing Firebase
 
@@ -20,7 +20,7 @@ The first thing we need to do to start using Firebase is to install it in our pr
 
 Go to the "**DEPENDENCIES**" section on your left panel and in the input box that says "_enter package name_" type **firebase**.
 
-![Install Firebase](.gitbook/assets/install-firebase.png)
+![Install Firebase](https://github.com/javebratt/ngcolombia-workshop/tree/a76186ccae7928dc593b2d79e797a85a00c6940a/.gitbook/assets/install-firebase.png)
 
 That gives you access to the entire Firebase SDK for web development. Now, we can take things one step further and install @angular/fire.
 
@@ -84,3 +84,4 @@ We're also adding the `AngularFirestoreModule` to let Angular know we'll be usin
 ## Next Steps
 
 Once you're ready, move to the next step where we'll start building the **C** part of CRUD, we'll add the functionality to create a TV show and save it to the database
+
