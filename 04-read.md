@@ -198,3 +198,5 @@ And lastly we need to go into the `card.component.html` file and make it look li
 ```
 
 And that's it, right now your app should be showing the card(s) showing the information of the TV Show(s) you added to the database :-)
+
+Once you're ready let's move to the next part where we'll start giving functionality to those buttons inside the card for updating and deleting TV Shows.
