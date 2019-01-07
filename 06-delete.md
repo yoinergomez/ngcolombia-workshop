@@ -6,7 +6,7 @@ Fortunately, we've already done all the leg work for this, including calling the
 
 First, open `card.component.ts` and create a `deleteShow()` function, it should take the show's ID and name as parameters.
 
-```javascript
+```js
 deleteShow(showId: string, showName: string): void {}
 ```
 
@@ -14,7 +14,7 @@ Since deleting data from the database is a **destructive** operation we want to 
 
 It should prompt the user for confirmation before calling the delete function:
 
-```javascript
+```js
 deleteShow(showId: string, showName: string): void {
   if(confirm(`Are you sure to delete ${showName} from your list?`)){
     // Call the delete function!
@@ -22,11 +22,11 @@ deleteShow(showId: string, showName: string): void {
 }
 ```
 
-![Confirmation Alert](.gitbook/assets/confirm-delete.png)
+![Confirmation Alert](img/confirm-delete.png)
 
 Now that the user is sure that's the show they want to remove, let's add the remove funcionality:
 
-```javascript
+```js
 deleteShow(showId: string, showName: string): void {
   if(confirm(`Are you sure to delete ${showName} from your list?`)){
     this.firebaseService.deleteShow(showId);
@@ -36,11 +36,10 @@ deleteShow(showId: string, showName: string): void {
 
 We're calling the `.deleteShow(showId)` function from our Firebase service, and since that function doesn't exist, it's time to go to `firebase.service.ts` to create it.
 
-```javascript
+```js
 public deleteShow(showId: string): Promise<void> {
   return this.tvShowCollection.doc(showId).delete();
 }
 ```
 
 The function take the `showId`as a parameter and then it goes to that document and calls firestore's `delete()` function, this functions removes the entire document from the database.
-

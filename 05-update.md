@@ -12,7 +12,7 @@ The first thing we need to do is to edit our `add-show.component.ts` file so tha
 
 Add the inputs before the constructor, it should look like this now:
 
-```javascript
+```js
 public newShowForm: FormGroup;
 @Input() oldShowName: string;
 @Input() oldShowDescription: string;
@@ -29,7 +29,7 @@ constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseS
 
 Now we need a way to let our form know that if we have those inputs it shoud assign them as a value of the form properties, go ahead and add this to your `ngOnInit()` function:
 
-```javascript
+```js
 ngOnInit() {
   this.newShowForm.patchValue({
     showName: this.oldShowName,
@@ -40,7 +40,7 @@ ngOnInit() {
 
 We can also use the same create functions to update, we just need to pass the right data, go ahead and look for the `addShow()` function, it should look like this:
 
-```javascript
+```js
 addShow(filledShowForm: FormGroup): void {
   const showName: string = filledShowForm.value.showName;
   const showDescription: string = filledShowForm.value.showDescription;
@@ -54,7 +54,7 @@ addShow(filledShowForm: FormGroup): void {
 
 Refactor it to look like this:
 
-```javascript
+```js
 addOrUpdateShow(filledShowForm: FormGroup): void {
   const showName: string = filledShowForm.value.showName;
   const showDescription: string = filledShowForm.value.showDescription;
@@ -72,7 +72,7 @@ You've probably guessed what's next, we have to refactor the Firebase Service so
 
 Go ahead and open the `firebase.service.ts` file and find the `createShow()` function, it should look like this:
 
-```javascript
+```js
 public createShow(showName: string, showDescription: string): Promise<void> {
   const showId: string = this.db.createId();
   return this.tvShowCollection
@@ -83,7 +83,7 @@ public createShow(showName: string, showDescription: string): Promise<void> {
 
 We're going to refactor it to look like this:
 
-```javascript
+```js
 public createOrUpdateShow(
   showName: string,
   showDescription: string,
@@ -101,21 +101,21 @@ public createOrUpdateShow(
 
 Here's what's going on:
 
-* We changed the function's name to match its new responsability.
-* We added a new parameter `oldShowId` of type string, and we're setting it to be `null`by default.
-* We're asking if the component is sending us the `oldShowId` or not.
-  * If it's sending the ID we move to that document and use the `.update()` to save the new name or description of the show.
-  * If there's no ID we execute the create functionality we created at the begining.
+- We changed the function's name to match its new responsability.
+- We added a new parameter `oldShowId` of type string, and we're setting it to be `null`by default.
+- We're asking if the component is sending us the `oldShowId` or not.
+  - If it's sending the ID we move to that document and use the `.update()` to save the new name or description of the show.
+  - If there's no ID we execute the create functionality we created at the begining.
 
 Now go ahead and open the `app.component.html`, we'll find our `<app-add-show>` tag that should look like this:
 
-```markup
+```html
 <app-add-show (showCreationForm)="hideForm()" *ngIf="showForm"></app-add-show>
 ```
 
 And replace it with this:
 
-```markup
+```html
 <app-add-show
   [oldShowName]="oldShowName"
   [showIdToUpdate]="showIdToUpdate"
@@ -129,7 +129,7 @@ All we're doing is adding the inputs to the component call, now we need to actua
 
 First, we'l declare the properties right before our constructor:
 
-```javascript
+```js
 public tvShowList: Observable<TVShow[]>;
 public showForm = false;
 public oldShowName = '';
@@ -139,7 +139,7 @@ public showIdToUpdate: string;
 
 Next we'l create a function that takes the TV Show as a parameter and returns the information to update to us, we'll call it `activateEditShow()`:
 
-```javascript
+```js
 activateEditShow(tvShow: TVShow): void {
   this.showForm = true;
   this.showIdToUpdate = tvShow.showId;
@@ -156,7 +156,7 @@ The only place it makes sense to do this is inside `CardComponent`, since it's w
 
 Open `card.component.html` and find the action buttons, they look like this:
 
-```markup
+```html
 <div class="show-actions">
   <button (click)="deleteShow()" class="button delete">Delete Show</button>
   <button (click)="editShow()" class="button edit">Edit Show</button>
@@ -165,7 +165,7 @@ Open `card.component.html` and find the action buttons, they look like this:
 
 We're going to use the `editShow()` function to send the `TVShow`object to the main component, for that we first need to send the proper parameters to the funcion:
 
-```markup
+```html
 <div class="show-actions">
   <button (click)="deleteShow(showId, showName)" class="button delete">
     Delete Show
@@ -180,7 +180,7 @@ We're sending the `showId` and `showName` to the `deleteShow()` function, and we
 
 Now let's move to `card.component.ts` and add a new property, it's going to be an `@Output()` called `showIdChanged`:
 
-```javascript
+```js
 @Input() showName: string;
 @Input() showDescription: string;
 @Input() showId: string;
@@ -189,7 +189,7 @@ Now let's move to `card.component.ts` and add a new property, it's going to be a
 
 After we create the property we're going to create the `editShow()` function, it needs to emit the show's information to the parent component:
 
-```javascript
+```js
 editShow(showId: string, showName: string, showDescription: string): void {
   const newShowInfo: TVShow = { showId, showName, showDescription }
   this.showIdChanged.emit(newShowInfo);
@@ -197,4 +197,3 @@ editShow(showId: string, showName: string, showDescription: string): void {
 ```
 
 And that's it, when you click on the **Edit Show** button from any of the cards you should see the form display already pre-filled with the show's information.
-
