@@ -83,4 +83,4 @@ We're also adding the `AngularFirestoreModule` to let Angular know we'll be usin
 
 ## Next Steps
 
-Once you're ready, move to the next step where we'll start building the **C** part of CRUD, we'll create the functionality to create a TV show and add it to the database
+Once you're ready, move to the next step where we'll start building the **C** part of CRUD, we'll add the functionality to create a TV show and save it to the database
