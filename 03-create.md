@@ -450,3 +450,5 @@ Right now you should have something like this on your app:
 ![Show form button](img/show-form-button.png)
 
 And when you click the button it either shows or hides the form depending on its current state.
+
+When you're ready let's move to the next step, where we'll be adding the **R** part of CRUD, we'll learn how to read data from Firestore and display it inside our app.
