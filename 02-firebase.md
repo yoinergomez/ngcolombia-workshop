@@ -12,7 +12,7 @@ You can learn more about Firebase at [https://firebase.google.com/](https://fire
 
 Since we want to focus on building the actual app on this workshop we have already created a Firebase app for you to connect to, and we'll share the credentials with you later on this step.
 
-This we'll help you save some time that can be used to finish the app :\)
+This we'll help you save some time that can be used to finish the app :)
 
 ## Installing Firebase
 
@@ -84,4 +84,3 @@ We're also adding the `AngularFirestoreModule` to let Angular know we'll be usin
 ## Next Steps
 
 Once you're ready, move to the next step where we'll start building the **C** part of CRUD, we'll add the functionality to create a TV show and save it to the database
-

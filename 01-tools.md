@@ -6,7 +6,7 @@ For this workshop we'll use Angular and Firebase, but rather than making you ins
 
 It's a code editor you don't need to install. It runs on the web browser and handles everything for you.
 
-And when we say everything, we mean it. It gives you the editor, installs the packages for you, and even has a view where you can see the result of your app in real-time with live-reload \(_that's just fancy word to say the view updates when you write new code :-P_\)
+And when we say everything, we mean it. It gives you the editor, installs the packages for you, and even has a view where you can see the result of your app in real-time with live-reload (_that's just fancy word to say the view updates when you write new code :-P_)
 
 The first thing you'll need to do is head over to [https://stackblitz.com/](https://stackblitz.com/) where you'll see something like this:
 
@@ -27,4 +27,3 @@ On the right panel, you'll have a real-time view of your app.
 Go ahead, play with it, open the `app.component.html` and change the text inside the `<p></p>` tags to whatever you want, you'll see it updated in real-time in your right panel.
 
 Once you're ready, move to the next step, where you'll learn how to connect Firebase with your Angular app.
-

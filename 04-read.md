@@ -1,6 +1,6 @@
 # Reading objects from our database
 
-In the previous lesson we connected learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
+In the previous lesson we learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
 
 This time we're going to do things a little different, instead of starting with the logic, we're going to start with the view, even if we need to hardcode the data, and then replace it with dynamic data.
 
@@ -104,7 +104,7 @@ import { FirebaseService } from '../firebase.service';
 import { TVShow } from '../show-interface';
 ```
 
-By now you should recognize all of those imports, since we used them in the previous component, but if you have any questions about them remember that we're all here for you and you can asks us as many questions as you want :-\)
+By now you should recognize all of those imports, since we used them in the previous component, but if you have any questions about them remember that we're all here for you and you can asks us as many questions as you want :-)
 
 Now, right before the constructor we'll add the component's inputs:
 
@@ -118,7 +118,7 @@ An `@Input()` decorator tells our component that those variables will be passed 
 
 And that's it for now, we can move to the `app.component` file where we'll fetch the show list from Firestore and add those inputs to our card component.
 
-The first thing we want to do is to go inside the `app.component.ts` file and add a new class property \(_right before the constructor_\) and inject our Firebase service:
+The first thing we want to do is to go inside the `app.component.ts` file and add a new class property (_right before the constructor_) and inject our Firebase service:
 
 ```javascript
 public tvShowList: Observable<TVShow[]>;
@@ -127,7 +127,7 @@ public showForm = false;
 constructor(private firebaseService: FirebaseService) {}
 ```
 
-The `tvShowList` property will hold our TV shows, and we're declaring it to be an Observable of type `TVShow[]` \(_Or an array of TV Shows_\).
+The `tvShowList` property will hold our TV shows, and we're declaring it to be an Observable of type `TVShow[]` (_Or an array of TV Shows_).
 
 Now, let's call the `.getShowList()` function from our Firebase service and assign the result to our `tvShowList` property.
 
@@ -179,7 +179,7 @@ Here's what's going on:
 
 - We're using the `*ngFor` directive to tell our component it's going to loop through the `tvShowList` Observable.
   - We're adding the `| async` pipe to tell `*ngFor` that this is an async operation.
-- We're passing the inputs our component takes \(_id, name, and description_\).
+- We're passing the inputs our component takes (_id, name, and description_).
 
 And lastly we need to go into the `card.component.html` file and make it look like this:
 
