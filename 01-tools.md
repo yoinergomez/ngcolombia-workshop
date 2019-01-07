@@ -1,4 +1,4 @@
-# 01-tools
+# The tools we'll use
 
 For this workshop we'll use Angular and Firebase, but rather than making you install a bunch of packages, tools, and editor, we'll use **Stackblitz**.
 

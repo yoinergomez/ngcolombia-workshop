@@ -1,4 +1,4 @@
-# 03-create
+# How to store info in our database
 
 In the previous lesson, we connected our app to Firebase. Now it's time to start writing content into the database, for that we need a couple of things:
 

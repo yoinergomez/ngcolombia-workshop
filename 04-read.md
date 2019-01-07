@@ -1,4 +1,4 @@
-# 04-read
+# Reading data from our database
 
 In the previous lesson, we learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
 

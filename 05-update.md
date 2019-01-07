@@ -1,6 +1,6 @@
 # Updating objects from our database
 
-In the previous lesson we learned how to read data from Firestore. Now, it's time to learn how to update the data from the TV Shows we already created.
+In the previous lesson, we learned how to read data from Firestore. Now, it's time to learn how to update the data from the TV Shows we already created.
 
 The good news, most of this is already done, we will need to make a few edits to our app and add a new function, but no new components or anything like that.
 
@@ -27,7 +27,7 @@ constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseS
 }
 ```
 
-Now we need a way to let our form know that if we have those inputs it shoud assign them as a value of the form properties, go ahead and add this to your `ngOnInit()` function:
+Now we need a way to let our form know that if we have those inputs it should assign them as a value of the form properties, go ahead and add this to your `ngOnInit()` function:
 
 ```js
 ngOnInit() {
@@ -101,11 +101,11 @@ public createOrUpdateShow(
 
 Here's what's going on:
 
-- We changed the function's name to match its new responsability.
+- We changed the function's name to match its new responsibility.
 - We added a new parameter `oldShowId` of type string, and we're setting it to be `null`by default.
 - We're asking if the component is sending us the `oldShowId` or not.
   - If it's sending the ID we move to that document and use the `.update()` to save the new name or description of the show.
-  - If there's no ID we execute the create functionality we created at the begining.
+  - If there's no ID we execute the create functionality we created at the beginning.
 
 Now go ahead and open the `app.component.html`, we'll find our `<app-add-show>` tag that should look like this:
 
@@ -148,7 +148,7 @@ activateEditShow(tvShow: TVShow): void {
 }
 ```
 
-The funcions is setting `showForm` to `true`to display the form, and then setting all the information we need to perform the update.
+The function is setting `showForm` to `true`to display the form, and then setting all the information we need to perform the update.
 
 Now we need to figure out where do we call this function from, it has to be from a place where we have access to the current TV Show object.
 
@@ -163,7 +163,7 @@ Open `card.component.html` and find the action buttons, they look like this:
 </div>
 ```
 
-We're going to use the `editShow()` function to send the `TVShow`object to the main component, for that we first need to send the proper parameters to the funcion:
+We're going to use the `editShow()` function to send the `TVShow`object to the main component, for that we first need to send the proper parameters to the function:
 
 ```html
 <div class="show-actions">
@@ -196,4 +196,4 @@ editShow(showId: string, showName: string, showDescription: string): void {
 }
 ```
 
-And that's it, when you click on the **Edit Show** button from any of the cards you should see the form display already pre-filled with the show's information.
+And that's it when you click on the **Edit Show** button from any of the cards you should see the form display already pre-filled with the show's information.

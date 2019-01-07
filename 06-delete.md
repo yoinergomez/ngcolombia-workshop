@@ -1,6 +1,6 @@
 # Removing objects from our database
 
-In this lesson we'll finish builidng our application, the only missing functionality is the ability to remove content from the database.
+In this lesson we'll finish building our application, the only missing functionality is the ability to remove content from the database.
 
 Fortunately, we've already done all the leg work for this, including calling the delete function from the `CardComponent` HTML, now, we just need to take care of the details.
 
@@ -24,7 +24,7 @@ deleteShow(showId: string, showName: string): void {
 
 ![Confirmation Alert](img/confirm-delete.png)
 
-Now that the user is sure that's the show they want to remove, let's add the remove funcionality:
+Now that the user is sure that's the show they want to remove, let's add the remove functionality:
 
 ```js
 deleteShow(showId: string, showName: string): void {
@@ -42,4 +42,4 @@ public deleteShow(showId: string): Promise<void> {
 }
 ```
 
-The function take the `showId`as a parameter and then it goes to that document and calls firestore's `delete()` function, this functions removes the entire document from the database.
+The function takes the `showId`as a parameter and then it goes to that document and calls firestore's `delete()` function, this function removes the entire document from the database.

@@ -1,4 +1,4 @@
-# 02-firebase
+# Fire-what!?
 
 For this app, we'll use Firebase as our backend. If you don't know what Firebase is, it's an entire platform provided by Google that can handle almost every aspect of your app's infrastructure.
 
