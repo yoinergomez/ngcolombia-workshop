@@ -376,6 +376,10 @@ Let's start by opening the `app.component.html` file and pasting in the followin
 
 We're adding some text to the app, then we're adding a button to show/hide our newly created form, and then we're adding our `add-show` component using the `<app-add-show></app-add-show>` tag.
 
+If you're not sure where the `<app-add-show></app-add-show>` comes from, take a look at the `@Component()` decorator inside the `add-show` component.
+
+![AddShow Component Decorator](img/add-show-component.png)
+
 We're passing it the `Output()` we created in the component `showCreationForm`, once it triggers it will call the function `hideForm()` and we're setting a conditional that the form will only be visible if the `showForm` property is `true`.
 
 Open `app.component.css` now and add the styles:
