@@ -146,6 +146,8 @@ Right now you should be seeing a red underline on `.createShow()` saying somethi
 
 That's because we're calling the `.createShow()` function from the Firebase service but we haven't created the function yet, so let's do it right now.
 
+## Creating a Service
+
 Open the `firebase.service.ts` file, we'll start by importing what we need at the top of the file:
 
 ```js
@@ -185,6 +187,8 @@ So in the above code snippet, `tvShowCollection` is a list that will hold all th
 And second, it really bugs me to use `<any>` when working with TypeScript, using `any` makes us waste all the TypeScript powers and we should correct that.
 
 We're using `any` but we know the type of the collection, it's TV Show, because that collection will have a list of TV Shows, knowing that, we can create a TVShow interface with the properties.
+
+## Creating an Interface
 
 Go ahead and open the **Angular Generator** again (_right-click the app/ folder_) and choose **Interface**, name it **show**.
 
@@ -355,7 +359,7 @@ button {
 
 We won't go into details about the styles, but they are mainly giving some margins, paddings and colors to make sure everything looks nice.
 
-## Let's test it!
+## Let's test it
 
 By now you've written a good amount of code but haven't seen the results of it yet, this can be a little frustraiting so let's take a moment to display our form and create new shows.
 
