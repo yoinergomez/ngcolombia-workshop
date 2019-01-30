@@ -15,7 +15,6 @@ You'll learn:
 - How to create a new item and add it to that list.
 - How to edit one of those items.
 - How to delete one of those items.
-- How Angular components communicate with each other.
 
 In other words, you'll leave this workshop with the ability to interact with your Firebase database (_we'll use the new Firestore DB_) and handle all CRUD operations (_Create, Read, Update, and Delete_).
 
