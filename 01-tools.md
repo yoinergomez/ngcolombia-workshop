@@ -26,4 +26,8 @@ On the right panel, you'll have a real-time view of your app.
 
 Go ahead, play with it, open the `app.component.html` and change the text inside the `<p></p>` tags to whatever you want, you'll see it updated in real-time in your right panel.
 
+## What about the styles?
+
+The goal for this workshop is to get you comfortable writing code against a cloud backend, we won't focus on styles, but, since we want everything to look nice we're giving you the default CSS for the app, if you look into `app.component.css` you'll notice all the styles already applied there.
+
 Once you're ready, move to the next step, where you'll learn how to connect Firebase with your Angular app.
