@@ -33,7 +33,7 @@ remove(id: string) {
 
 The function is going into our specific TV Show and calling the `.delete()` method. And that's it! Whenever you click the X it's going to remove the show from the Firestore database.
 
-### Don't delete by accident
+## Don't delete by accident
 
 Ok, this isn't required, but it's a good practice, let's add a confirmation alert before calling the delete function.
 
