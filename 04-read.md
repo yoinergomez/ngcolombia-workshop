@@ -1,202 +1,108 @@
-# Reading data from our database
+# Reading your data
 
 In the previous lesson, we learned how to store data in Firestore. Now, it's time to learn how to read that data and display it inside our application.
 
-This time we're going to do things a little different, instead of starting with the logic, we're going to start with the view, even if we need to hardcode the data, and then replace it with dynamic data.
+Remember in the last lesson when we did this:
 
-We'll work like this because we want you to have feedback from the beginning, and be able to see what you're building.
-
-The idea is to show a list of cards, and inside each card have the show's information, by the end of the lesson you should have something like this:
-
-![Card showing the tv show's info](img/first-card.png)
-
-## Creating the CardComponent
-
-Let's start with creating a component for our cards, open the **Angular Generator** and add a new component called **card**
-
-![Angular Generator](img/add-component.png)
-
-Now go into the `app.component.html` file and add this to the end:
-
-```html
-<app-card></app-card>
+```js
+constructor(private db: AngularFirestore) {
+  this.showCollection = db.collection('shows');
+  this.showList = this.showCollection.valueChanges();
+}
 ```
 
-We're adding our card component to the app component, this will render the card just like it rendered the form.
+That bit of code right there is enough to create a reference to our TV Shows, and then transform that into an `Observable` we can display on our page.
 
-Now let's move to the `card.component.html`, the idea is to have a card that displays the show's information and two buttons, a button to delete the show from our database and a button to edit the show's information:
+All you need to do now is to add the markup (_The HTML_) and the app will show the cards you start creating.
+
+So move to our `app.component.ts` file and add the following code:
 
 ```html
-<div class="card">
-  <div class="show-info">
-    <h2 class="title">The Mentalist</h2>
-    <p class="description">
-      I gave an honest chance to this show, but for the life of me I don't like it, like,
-      there are tons of 'insert another profession here' turned detective that it's just
-      boring.
-    </p>
-  </div>
-
-  <div class="show-actions">
-    <button (click)="deleteShow()" class="button delete">Delete Show</button>
-    <button (click)="editShow()" class="button edit">Edit Show</button>
-  </div>
+<div class="card" *ngFor="let show of showList | async">
+  <img [src]="show.picture" width="50px" height="50px" />
+  <input [value]="show.name" />
 </div>
-```
-
-We're hardcoding the data because we want you to see the card in your app's view immediately, then we'll start replacing that data with the data from the Firestore database.
-
-Now, move to the `add.component.css` file and add the styles:
-
-```css
-.card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Arial';
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  border-radius: 10px;
-  margin: 20px;
-}
-
-.show-info {
-  width: 75%;
-  margin-right: 20px;
-}
-
-.show-actions {
-  width: 25%;
-  text-align: center;
-}
-
-.button {
-  width: 100%;
-  height: 40px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  color: #000000;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 10px 0;
-}
-
-.delete {
-  border: 1px solid #ff0000;
-}
-
-.edit {
-  border: 1px solid #0037b1;
-}
-```
-
-Same as before, we're adding margins, padding, colors, and borders, just trying to make our app look nice.
-
-## Adding the logic
-
-Now that we can see our card in action, it's time to start plugin in our database, the first thing we want to do is to go inside the `card.component.ts` file and add the imports we need to the top of the file:
-
-```js
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FirebaseService } from '../firebase.service';
-import { TVShow } from '../show-interface';
-```
-
-By now you should recognize all of those imports since we used them in the previous component, but if you have any questions about them remember that we're all here for you and you can ask us as many questions as you want :-)
-
-Now, right before the constructor we'll add the component's inputs:
-
-```js
-@Input() showName: string;
-@Input() showDescription: string;
-@Input() showId: string;
-```
-
-An `@Input()` decorator tells our component that those variables will be passed from the parent component.
-
-And that's it for now, we can move to the `app.component` file where we'll fetch the show list from Firestore and add those inputs to our card component.
-
-The first thing we want to do is to go inside the `app.component.ts` file and add a new class property (_right before the constructor_) and inject our Firebase service:
-
-```js
-public tvShowList: Observable<TVShow[]>;
-public showForm = false;
-
-constructor(private firebaseService: FirebaseService) {}
-```
-
-The `tvShowList` property will hold our TV shows, and we're declaring it to be an Observable of type `TVShow[]` (_Or an array of TV Shows_).
-
-Now, let's call the `.getShowList()` function from our Firebase service and assign the result to our `tvShowList` property.
-
-```js
-public tvShowList: Observable<TVShow[]>;
-public showForm = false;
-
-constructor(private firebaseService: FirebaseService) {
-  this.getShowList();
-}
-
-getShowList(): void {
-  this.tvShowList = this.firebaseService.getShowList();
-}
-```
-
-It's showing you an error because we haven't created the `getShowList()`, so go ahead and open `firebase.service.ts` and let's create the function there:
-
-```js
-public getShowList(): Observable<TVShow[]> {
-  return this.tvShowCollection.valueChanges();
-}
-```
-
-This function is taking the `tvShowCollection` Collection and attaching the method `.valueChanges()` to transform it into an observable, and then it's returning its value.
-
-If you move back to `app.component.ts` you'll notice that the error is gone.
-
-Our next move is to replace the hardcoded that with the data our database is returning, for that we have to edit 2 files, the `app.component.html` file, and the `card.component.html` file.
-
-Let's start with the `app.component.html` file, find the card initialization that looks like this:
-
-```html
-<app-card></app-card>
-```
-
-And replace it with this:
-
-```html
-<app-card
-  *ngFor="let item of tvShowList | async"
-  [showName]="item.showName"
-  [showDescription]="item.showDescription"
-  [showId]="item.showId"
-></app-card>
 ```
 
 Here's what's going on:
 
-- We're using the `*ngFor` directive to tell our component it's going to loop through the `tvShowList` Observable.
-  - We're adding the `| async` pipe to tell `*ngFor` that this is an async operation.
-- We're passing the inputs our component takes (_id, name, and description_).
+- `*ngFor="let show of showList | async"` is telling our angular app that the `<div>`is going to look at the `showList` property and repeat itself with every show it finds inside.
+- The `async` pipe is telling the app that `showList` has an asynchronous value.
+- `<img [src]="show.picture" width="50px" height="50px" />` is accessing at the `picture` property of our show and setting it as the source for the image.
+- `<input [value]="show.name" />` is creating an input pre-populated with our TV Show's name.
 
-And lastly we need to go into the `card.component.html` file and make it look like this:
+Right now you should be able to see the TV Shows you add to your database, so go ahead and click the '**ADD**' button a few times and notice how the cards start popping out on your page.
+
+## Updating objects from our database
+
+Now that we can see our cards, the next step would be to be able to update some of the show's information, such as the show's name, and the picture (_remember, we're showing a random picture there_)
+
+For that let's modify the HTML we just wrote, we want to add event handlers on the image and the input so that when users click the image or write the show's name we can call functions that save that information to Firebase.
+
+Right now it looks like this:
 
 ```html
-<div class="card">
-  <div class="show-info">
-    <h2 class="title">{{ showName }}</h2>
-    <p class="description">{{ showDescription }}</p>
-  </div>
-
-  <div class="show-actions">
-    <button (click)="deleteShow()" class="button delete">Delete Show</button>
-    <button (click)="editShow()" class="button edit">Edit Show</button>
-  </div>
+<div class="card" *ngFor="let show of showList | async">
+  <img [src]="show.picture" width="50px" height="50px" />
+  <input [value]="show.name" />
 </div>
 ```
 
-And that's it, right now your app should be showing the card(s) showing the information of the TV Show(s) you added to the database :-)
+Let's add a click handler for the image that triggers a function called `updatePicture()` and takes the show's ID as a parameter:
 
-Once you're ready let's move to the next part where we'll start giving functionality to those buttons inside the card for updating and deleting TV Shows.
+```html
+<div class="card" *ngFor="let show of showList | async">
+  <img (click)="updatePicture(show.id)" [src]="show.picture" width="50px" height="50px" />
+  <input [value]="show.name" />
+</div>
+```
+
+Now let's create a change handler on the input, that calls the `updateName()` function when we change the show's name:
+
+```html
+<div class="card" *ngFor="let show of showList | async">
+  <img (click)="updatePicture(show.id)" [src]="show.picture" width="50px" height="50px" />
+  <input (change)="updateName(show.id, $event.target.value)" [value]="show.name" />
+</div>
+```
+
+Notice how we're passing the show's ID and whatever text is on the input.
+
+Now we need to go to our `app.component.ts` page and create both of those functions, let's start with the update image one:
+
+```js
+updatePicture(id: string) {
+  const picture = prompt('Please enter an image URL:')
+  if (picture) {
+    this.showCollection.doc(id).update({ picture });
+  }
+}
+```
+
+That function is:
+
+- Calling the browser's native prompt alert asking you for the new image URL.
+- Getting whatever you write and assigning it to the variable `picture`.
+- If you do write something it goes inside the Firestore document and updates the property `picture`.
+
+Let's do the same for our update name function:
+
+```js
+updateName(id: string, name: string) {
+  this.showCollection.doc(id).update({ name });
+}
+```
+
+We're creating a function that goes into our show and updates the name property.
+
+## `.set()` vs `.update()`
+
+You might have noticed that we've used 2 different ways to add data to Firestore, one was using the method `.set()` and the other one was using the `.update()` method.
+
+What's the difference between these two?
+
+Well, `.set()` is destructive and `.update()` isn't.
+
+That meas that when you use `.set({ name: 'Jorge' })` it will delete every single property of that object and leave only the name property.
+
+And when you use `.update({ name: 'Jorge' })` it's going to look for the `name` property and change its value, all the other properties will remain the same.
