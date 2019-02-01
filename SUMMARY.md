@@ -1,6 +1,6 @@
 # Table of contents
 
-- [README](README.md)
+- [Welcome](README.md)
 - [The tools we'll use](01-tools.md)
 - [Fire-what!?](02-firebase.md)
 - [How to store info in our database](03-create.md)

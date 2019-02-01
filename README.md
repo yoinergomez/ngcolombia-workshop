@@ -1,4 +1,4 @@
-# README
+# Welcome
 
 First of all, thank you. We know it's not easy to take time out of your weekend, so we're grateful you decided to trust we'll make it worth it :-)
 
