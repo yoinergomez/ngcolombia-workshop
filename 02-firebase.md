@@ -59,7 +59,6 @@ We want it to look like this:
 @NgModule({
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyBIM6XVuaqeBDtyyB9Ef1U5oUv9Cue9BK8',
       authDomain: 'first-firebase-angular.firebaseapp.com',
@@ -71,8 +70,7 @@ We want it to look like this:
     AngularFirestoreModule,
   ],
   declarations: [AppComponent, CardComponent, AddShowComponent],
-  bootstrap: [AppComponent],
-  providers: [FirebaseService],
+  bootstrap: [AppComponent]
 })
 ```
 
@@ -81,6 +79,35 @@ We're adding `AngularFireModule` and calling the `.initializeApp()` method to co
 You'll copy those same credentials, the idea is we all share the same app and work faster that way.
 
 We're also adding the `AngularFirestoreModule` to let Angular know we'll be using the Firestore database in our project.
+
+In the end, the entire file should look like this:
+
+```js
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    AngularFireModule.initializeApp({
+      apiKey: 'AIzaSyBIM6XVuaqeBDtyyB9Ef1U5oUv9Cue9BK8',
+      authDomain: 'first-firebase-angular.firebaseapp.com',
+      databaseURL: 'https://first-firebase-angular.firebaseio.com',
+      projectId: 'first-firebase-angular',
+      storageBucket: 'first-firebase-angular.appspot.com',
+      messagingSenderId: '306103315077',
+    }),
+    AngularFirestoreModule,
+  ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  providers: [],
+})
+export class AppModule {}
+```
 
 ## Next Steps
 
