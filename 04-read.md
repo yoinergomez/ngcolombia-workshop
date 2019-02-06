@@ -15,7 +15,7 @@ That bit of code right there is enough to create a reference to our TV Shows, an
 
 All you need to do now is to add the markup (_The HTML_) and the app will show the cards you start creating.
 
-So move to our `app.component.ts` file and add the following code:
+So move to our `app.component.html` file and add the following code:
 
 ```html
 <div class="card" *ngFor="let show of showList | async">
