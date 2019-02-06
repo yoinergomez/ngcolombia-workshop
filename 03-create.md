@@ -31,6 +31,8 @@ We want to create a type for our TV Shows, that way every part of our app knows 
 
 Name your interface `show`.
 
+The file name should be **show.interface.ts**, if it isn't you can right click it and rename it.
+
 Once that's done, let's add the properties we want inside the interface, a show should have an ID, a name, and a picture, so open `show.interface.ts` and make it look like this:
 
 ```js

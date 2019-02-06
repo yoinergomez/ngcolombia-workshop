@@ -20,6 +20,8 @@ The first thing we need to do to start using Firebase is to install it in our pr
 
 Go to the "**DEPENDENCIES**" section on your left panel and in the input box that says "_enter package name_" type **firebase**, then hit enter.
 
+> NOTE: The package name needs to be written in lowercase, if you use uppercase it will show you an error saying it can't find it.
+
 ![Install Firebase](img/install-firebase.png)
 
 That gives you access to the entire Firebase SDK for web development. Now, we can take things one step further and install @angular/fire.
