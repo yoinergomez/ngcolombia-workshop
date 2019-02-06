@@ -24,11 +24,13 @@ Go to the "**DEPENDENCIES**" section on your left panel and in the input box tha
 
 ![Install Firebase](img/install-firebase.png)
 
-That gives you access to the entire Firebase SDK for web development. Now, we can take things one step further and install @angular/fire.
+That gives you access to the entire Firebase SDK for web development. Now, we can take things one step further and install `@angular/fire` and `@firebase/util`.
 
 `@angular/fire` is a library created by people from both the Firebase and the Angular teams, and it gives you better integration with Firebase when you're working on Angular projects.
 
-You can install it by typing `@angular/fire` in the input box that says "_enter package name_" the same way you installed Firebase.
+`@firebase/util` is a utility library from Firebase that is needed starting from version 5.8.0.
+
+You can install it by typing `@angular/fire` in the input box that says "_enter package name_" the same way you installed Firebase, then do the same for `@firebase/util`.
 
 Once both are installed you can go into `package.json` and see the package names there, if you don't, feel free to ask one of the mentors for help :)
 
