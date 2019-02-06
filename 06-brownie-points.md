@@ -37,6 +37,6 @@ All you need to do is to call the selector inside your app:
 <tv-show-card></tv-show-card>
 ```
 
-Now try it yourself, go ahead and transform our card into a component and then render it on the screen.
+Now try it yourself, go ahead and transform our card into a component and then render it on the screen. You can choose the name you want for the component and add whatever new functionality you can think of :-)
 
 Remember, don't be shy or affraid to ask questions, the mentors are here for you!
