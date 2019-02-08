@@ -22,7 +22,15 @@ You'll head over to **"START A NEW PROJECT"** and click on Angular, it will crea
 - On the middle panel, you'll see the opened file. That's your code, and every edit you do there we'll appear live in the right panel.
 - On the right panel, you'll have a real-time view of your app.
 
-Go ahead, play with it, open the `app.component.html` and change the text inside the `<p></p>` tags to whatever you want, you'll see it updated in real-time in your right panel.
+Go ahead, play with it, open the `app.component.html` and delete everything, replace it with this:
+
+```html
+<p>
+  Hello World!
+</p>
+```
+
+Then you'll see it updated in real-time in your right panel.
 
 ## What about the styles? 💅
 
