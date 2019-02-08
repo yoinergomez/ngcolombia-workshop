@@ -1,33 +1,32 @@
-# The tools we'll use
+# 2. The tools 🔨
 
-For this workshop we'll use Angular and Firebase, but rather than making you install a bunch of packages, tools, and editor, we'll use **Stackblitz**.
+For this workshop we'll use Angular and Firebase, but instead of installing a bunch of packages, tools, and editors, we'll use **Stackblitz 💡**
 
-## What's Stackblitz?
+## What's Stackblitz? 🤔
 
 It's a code editor you don't need to install. It runs on the web browser and handles everything for you.
 
-And when we say everything, we mean it. It gives you the editor, installs the packages for you, and even has a view where you can see the result of your app in real-time with live-reload (_that's just fancy word to say the view updates when you write new code :-P_)
+![](https://media.giphy.com/media/oF5oUYTOhvFnO/giphy.gif)
 
-The first thing you'll need to do is head over to [https://stackblitz.com/](https://stackblitz.com/) where you'll see something like this:
+And when we say everything, **we mean it**. It gives you the editor, installs the packages for you, and even has a view where you can see the result of your app in real-time with live-reload \(_that's just fancy word to say the view updates when you write new code_\).
 
-![Stackblitz project type selection](img/stackblitz-create.png)
+The first thing you'll need to do is head over to [**https://stackblitz.com/**](https://stackblitz.com/) where you'll see something like this:
 
-You'll head over to "START A NEW PROJECT" and click on Angular, it will create a new Angular project for you with all the dependencies.
+![Stackblitz project type selection](.gitbook/assets/stackblitz-create.png)
 
-You'll see something like this:
+You'll head over to **"START A NEW PROJECT"** and click on Angular, it will create a new Angular project for you with all the dependencies. You'll see something like this:
 
-![Angular Folder Structure](img/stackblitz-angular-folder.png)
+![Angular Folder Structure](.gitbook/assets/stackblitz-angular-folder.png)
 
-On the left panel, you'll have the folder structure, you can click on any file there and it will open it for you.
-
-On the middle panel, you'll see the opened file. That's your code, and every edit you do there we'll appear live in the right panel.
-
-On the right panel, you'll have a real-time view of your app.
+* On the left panel, you'll have the folder structure, you can click on any file there and it will open it for you.
+* On the middle panel, you'll see the opened file. That's your code, and every edit you do there we'll appear live in the right panel.
+* On the right panel, you'll have a real-time view of your app.
 
 Go ahead, play with it, open the `app.component.html` and change the text inside the `<p></p>` tags to whatever you want, you'll see it updated in real-time in your right panel.
 
-## What about the styles?
+## What about the styles? 💅
 
-The goal for this workshop is to get you comfortable writing code against a cloud backend, we won't focus on styles, but, since we want everything to look nice we're giving you the default CSS for the app, if you look into `app.component.css` you'll notice all the styles already applied there.
+The goal for this workshop is to get you comfortable writing code against a cloud backend. We won't focus on styles but since we want everything to look nice we're giving you the **default CSS** for the app.
 
-Once you're ready, move to the next step, where you'll learn how to connect Firebase with your Angular app.
+Once you're ready, move to the next step, where you'll learn how to **connect Firebase** with your Angular app.
+
