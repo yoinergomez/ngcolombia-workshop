@@ -2,6 +2,12 @@
 
 First of all, thank you. We know it's not easy to take time out of your weekend, so we're grateful you decided to trust us. We'll make it worth it 💪
 
+Before we start, remember:
+
+* 🙌 We follow a Code of Conduct to ensure everyone a safe and comfortable space. Read it [**here**](https://www.ngcolombia.com/coc).
+* 📷 Please let us know if you don't want to appear in photos or videos made during the event, otherwise, we'll assume consent.
+* 🖐 Take care of your belongings! We won't be responsible for them.
+
 ## So what are going to build? 🤔
 
 Throughout this workshop, we'll build a light version of [**IMDb**](https://www.imdb.com/) \(_Internet Movie Database_\), a place where we'll keep a record of our favorite TV Shows or movies.
