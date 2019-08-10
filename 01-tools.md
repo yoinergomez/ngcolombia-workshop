@@ -40,7 +40,7 @@ Go ahead and inside the `app/app.component.css` file paste the following code:
 
 ```css
 header {
-  background: url(https://assets.billboard.com/assets/1544728669/images/charts/header-background/desktop/bb-charts-hot-100.svg?e5261e8a0999849f9cef);
+  background: url(https://assets.billboard.com/assets/1565202395/images/charts/header-background/desktop/bb-charts-hot-100.svg);
   color: white;
   padding: 1rem 1rem 0.5rem 1rem;
 }
