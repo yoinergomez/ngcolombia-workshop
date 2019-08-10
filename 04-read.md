@@ -70,7 +70,7 @@ Right now it looks like this:
 Let's add a click handler for the image that triggers a function called `updatePicture()` and takes the show's ID as a parameter:
 
 {% code-tabs %}
-{% code-tabs-item title="app.component.ts" %}
+{% code-tabs-item title="app.component.html" %}
 ```markup
 <div class="card" *ngFor="let show of showList | async">
   <img (click)="updatePicture(show.id)" [src]="show.picture" width="50px" height="50px" />
@@ -83,7 +83,7 @@ Let's add a click handler for the image that triggers a function called `updateP
 Now let's create a change handler on the input that calls the `updateName()` function when we change the show's name:
 
 {% code-tabs %}
-{% code-tabs-item title="app.component.ts" %}
+{% code-tabs-item title="app.component.html" %}
 ```markup
 <div class="card" *ngFor="let show of showList | async">
   <img (click)="updatePicture(show.id)" [src]="show.picture" width="50px" height="50px" />
